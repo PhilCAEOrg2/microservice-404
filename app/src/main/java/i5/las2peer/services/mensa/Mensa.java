@@ -134,7 +134,7 @@ public class Mensa extends RESTService {
 
   /**
    * 
-   * addDishRating
+   * abc
    *
    * 
    * @param id Id of the dish to which a rating should be added. a String
@@ -145,7 +145,7 @@ public class Mensa extends RESTService {
    * 
    */
   @POST
-  @Path("/dishes/{id}/ratings")
+  @Path("/abc/{id}")
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
   @ApiResponses(value = {
@@ -153,8 +153,8 @@ public class Mensa extends RESTService {
        @ApiResponse(code = HttpURLConnection.HTTP_NOT_FOUND, message = "Dish with given id could not be found."),
        @ApiResponse(code = HttpURLConnection.HTTP_CREATED, message = "Dish rating created successfully.")
   })
-  @ApiOperation(value = "addDishRating", notes = " ")
-  public Response addDishRating(@PathParam("id") String id, String body) {
+  @ApiOperation(value = "abc", notes = " ")
+  public Response abc(@PathParam("id") String id, String body) {
    classes.DishRating payloadbodyObject = new classes().new DishRating();
    try { 
        payloadbodyObject.fromJSON(body);
