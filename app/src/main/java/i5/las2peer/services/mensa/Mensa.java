@@ -134,12 +134,84 @@ public class Mensa extends RESTService {
 
   /**
    * 
+   * addDishRating
+   *
+   * 
+   * @param id Id of the dish to which a rating should be added. a String
+   * @param body Dish rating that should be added. a JSONObject
+
+   * 
+   * @return Response Dish rating created successfully.
+   * 
+   */
+  @POST
+  @Path("/dishes/{id}/ratings")
+  @Produces(MediaType.APPLICATION_JSON)
+  @Consumes(MediaType.APPLICATION_JSON)
+  @ApiResponses(value = {
+       @ApiResponse(code = HttpURLConnection.HTTP_BAD_REQUEST, message = "Given dish rating has no valid format."),
+       @ApiResponse(code = HttpURLConnection.HTTP_NOT_FOUND, message = "Dish with given id could not be found."),
+       @ApiResponse(code = HttpURLConnection.HTTP_CREATED, message = "Dish rating created successfully.")
+  })
+  @ApiOperation(value = "addDishRating", notes = " ")
+  public Response addDishRating(@PathParam("id") String id, String body) {
+   classes.DishRating payloadbodyObject = new classes().new DishRating();
+   try { 
+       payloadbodyObject.fromJSON(body);
+   } catch (Exception e) { 
+       e.printStackTrace();
+       JSONObject result = new JSONObject();
+       return Response.status(HttpURLConnection.HTTP_INTERNAL_ERROR).entity("Cannot convert json to object").build();
+   }
+
+
+
+     
+    // service method invocations
+
+     
+
+
+
+
+    // badRequest
+    boolean badRequest_condition = true;
+    if(badRequest_condition) {
+      JSONObject badRequest = new JSONObject();
+
+      
+
+      return Response.status(HttpURLConnection.HTTP_BAD_REQUEST).entity(badRequest.toJSONString()).build();
+    }
+    // notFound
+    boolean notFound_condition = true;
+    if(notFound_condition) {
+      JSONObject notFound = new JSONObject();
+
+      
+
+      return Response.status(HttpURLConnection.HTTP_NOT_FOUND).entity(notFound.toJSONString()).build();
+    }
+    // created
+    boolean created_condition = true;
+    if(created_condition) {
+      JSONObject created = new classes().new DishRating().toJSON();
+
+      
+
+      return Response.status(HttpURLConnection.HTTP_CREATED).entity(created.toJSONString()).build();
+    }
+    return null;
+  }
+
+  /**
+   * 
    * listDishes
    *
    * 
    *
    * 
-   * @return Response 
+   * @return Response Returns list of available dishes.
    * 
    */
   @GET
@@ -147,7 +219,8 @@ public class Mensa extends RESTService {
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.TEXT_PLAIN)
   @ApiResponses(value = {
-       @ApiResponse(code = HttpURLConnection.HTTP_OK, message = "ok")
+       @ApiResponse(code = HttpURLConnection.HTTP_INTERNAL_ERROR, message = "Internal error."),
+       @ApiResponse(code = HttpURLConnection.HTTP_OK, message = "Returns list of available dishes.")
   })
   @ApiOperation(value = "listDishes", notes = " ")
   public Response listDishes() {
@@ -163,6 +236,15 @@ public class Mensa extends RESTService {
 
 
 
+    // error
+    boolean error_condition = true;
+    if(error_condition) {
+      JSONObject error = new JSONObject();
+
+      
+
+      return Response.status(HttpURLConnection.HTTP_INTERNAL_ERROR).entity(error.toJSONString()).build();
+    }
     // ok
     boolean ok_condition = true;
     if(ok_condition) {
