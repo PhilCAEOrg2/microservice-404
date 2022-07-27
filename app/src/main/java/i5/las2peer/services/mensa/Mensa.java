@@ -134,7 +134,7 @@ public class Mensa extends RESTService {
 
   /**
    * 
-   * abc
+   * addDishRating
    *
    * 
    * @param id Id of the dish to which a rating should be added. a String
@@ -145,15 +145,15 @@ public class Mensa extends RESTService {
    * 
    */
   @POST
-  @Path("/abc/{id}")
+  @Path("//dishes/{id}/ratings")
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
   @ApiResponses(value = {
        @ApiResponse(code = HttpURLConnection.HTTP_BAD_REQUEST, message = "Given dish rating has no valid format."),
        @ApiResponse(code = HttpURLConnection.HTTP_CREATED, message = "Dish rating created successfully.")
   })
-  @ApiOperation(value = "abc", notes = " ")
-  public Response abc(@PathParam("id") String id, String body) {
+  @ApiOperation(value = "addDishRating", notes = " ")
+  public Response addDishRating(@PathParam("id") String id, String body) {
    classes.DishRating payloadbodyObject = new classes().new DishRating();
    try { 
        payloadbodyObject.fromJSON(body);
@@ -209,6 +209,7 @@ public class Mensa extends RESTService {
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.TEXT_PLAIN)
   @ApiResponses(value = {
+       @ApiResponse(code = HttpURLConnection.HTTP_INTERNAL_ERROR, message = "Internal error."),
        @ApiResponse(code = HttpURLConnection.HTTP_OK, message = "Returns list of available dishes.")
   })
   @ApiOperation(value = "listDishes", notes = " ")
@@ -225,6 +226,15 @@ public class Mensa extends RESTService {
 
 
 
+    // error
+    boolean error_condition = true;
+    if(error_condition) {
+      JSONObject error = new JSONObject();
+
+      
+
+      return Response.status(HttpURLConnection.HTTP_INTERNAL_ERROR).entity(error.toJSONString()).build();
+    }
     // ok
     boolean ok_condition = true;
     if(ok_condition) {
