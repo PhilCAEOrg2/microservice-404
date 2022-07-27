@@ -150,7 +150,6 @@ public class Mensa extends RESTService {
   @Consumes(MediaType.APPLICATION_JSON)
   @ApiResponses(value = {
        @ApiResponse(code = HttpURLConnection.HTTP_BAD_REQUEST, message = "Given dish rating has no valid format."),
-       @ApiResponse(code = HttpURLConnection.HTTP_NOT_FOUND, message = "Dish with given id could not be found."),
        @ApiResponse(code = HttpURLConnection.HTTP_CREATED, message = "Dish rating created successfully.")
   })
   @ApiOperation(value = "abc", notes = " ")
@@ -182,15 +181,6 @@ public class Mensa extends RESTService {
       
 
       return Response.status(HttpURLConnection.HTTP_BAD_REQUEST).entity(badRequest.toJSONString()).build();
-    }
-    // notFound
-    boolean notFound_condition = true;
-    if(notFound_condition) {
-      JSONObject notFound = new JSONObject();
-
-      
-
-      return Response.status(HttpURLConnection.HTTP_NOT_FOUND).entity(notFound.toJSONString()).build();
     }
     // created
     boolean created_condition = true;
